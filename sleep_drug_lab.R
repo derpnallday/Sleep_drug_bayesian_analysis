@@ -16,7 +16,6 @@ Drug2 = myDataFrame$L.Hyoscine
 Drug3 = myDataFrame$R.Hyoscine
 
 
-
 #-------------------------------------------------------------------------------
 #explore the distribution of the data
 par(mfrow=c(2,2))
@@ -52,6 +51,7 @@ graphFileType = "eps"
 # Load the relevant model into R's working memory:
 source("Jags-Ymet-Xnom1grp-Mrobust.R")
 #------------------------------------------------------------------------------- 
+
 # Generate the MCMC chains for 3 groups:
 mcmcCoda1 = genMCMC( data=Drug1 , numSavedSteps=20000 , saveName=fileNameRoot1 )
 mcmcCoda2 = genMCMC( data=Drug2 , numSavedSteps=20000 , saveName=fileNameRoot2 )
@@ -59,6 +59,7 @@ mcmcCoda3 = genMCMC( data=Drug3 , numSavedSteps=20000 , saveName=fileNameRoot3 )
 
 
 #------------------------------------------------------------------------------- 
+
 # Display diagnostics of chain, for specified parameters:
 parameterNames = varnames(mcmcCoda1) # get all parameter names
 for ( parName in parameterNames ) {
@@ -77,6 +78,7 @@ for ( parName in parameterNames ) {
   diagMCMC( codaObject=mcmcCoda3 , parName=parName , 
             saveName=fileNameRoot3 , saveType=graphFileType )
 }
+
 #------------------------------------------------------------------------------- 
 # Get summary statistics of 1:
 summaryInfo = smryMCMC( mcmcCoda1 , 
